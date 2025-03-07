@@ -6,7 +6,9 @@ readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
     "autogen>=0.8.0",
+    "crewai>=0.95.0",
     "jupyter>=1.1.1",
+    "load-dotenv>=0.1.0",
     "numpy>=2.2.3",
     "openai>=1.65.4",
     "pandas>=2.2.3",

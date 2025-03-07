@@ -3,13 +3,20 @@ import os
 from autogen import ConversableAgent, initiate_chats, register_function
 from dotenv import load_dotenv
 
+from weather import accuweather_get_city_location_key, accuweather_get_forecast_one_day
+
 load_dotenv()
 
 # source: https://bryananthonio.com/blog/autogen-weather-chatbot/
 
+# 3 main agents:
+# 1. User Proxy Agent
+# 2. Weather Assistant
+# 3. Weather API Proxy
+
 llm_config = {
     "config_list": [
-        {"model": "gpt-4o-mini", "api_key": os.environ.get("OPENAI_API _KEY")}
+        {"model": "gpt-4o-mini", "api_key": os.environ.get("OPENAI_API_KEY")}
     ],
     "cache_seed": None,
 }
@@ -32,10 +39,14 @@ weather_api_proxy = ConversableAgent(
 )
 
 
-def get_current_weather():
-    response = []
+def get_current_weather(city: str = "Milan"):
+    # Note: by default we get Milan weather forecast,
+    # TODO: update to support other locations
+    location_key = accuweather_get_city_location_key(city=city)
 
-    return response.json()
+    weather_forecast = accuweather_get_forecast_one_day(location_key)
+
+    return weather_forecast
 
 
 register_function(
@@ -54,16 +65,15 @@ user_proxy = ConversableAgent(
     human_input_mode="ALWAYS",
 )
 
-
 chats = [
     {
         "sender": weather_assistant,
         "recipient": user_proxy,
-        "message": "Hello, I'm here to provide recommendations based on the current weather."
+        "message": "Hello, I'm here to provide recommendations based on the current weather. "
         "How may I help you?",
         "summary_method": "reflection_with_llm",
         "max_turns": 2,
     }
 ]
 
-# initiate_chats(chats)
+initiate_chats(chats)
