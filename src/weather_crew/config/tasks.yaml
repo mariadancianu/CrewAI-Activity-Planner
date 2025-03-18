@@ -1,0 +1,8 @@
+weather_collection:
+  description: >
+    Collect the weather forecast for {location} for today.
+    Use the get_weather tool with the city name directly as a string argument:
+    get_weather("{location}")
+  expected_output: >
+    The weather forecast for {location} is {forecast}.
+  agent: weather_assistant
