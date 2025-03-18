@@ -1,5 +1,7 @@
 # CrewAI Agentic AI - Weather Assistant
 
+![CrewAI Agentic AI - Weather Assistant](images/img.png)
+
 
 ## 📌 Project Overview
 
