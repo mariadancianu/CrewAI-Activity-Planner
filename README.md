@@ -24,6 +24,38 @@ The primary goal is to learn and test how AI agents can autonomously retrieve an
 - [AccuWeather API](https://developer.accuweather.com/) (or any weather API of choice)
 
 
+## Details
+
+Key Components:
+
+    src/weather_crew/main.py:
+    -> Main script file.
+
+
+    src/weather_crew/crew.py:
+    -> Main crew file where agents and tasks come together, and the main logic is executed.
+
+
+    src/weather_crew/config/agents.yaml:
+    -> Configuration file for defining agents.
+
+
+    src/weather_crew/config/tasks.yaml:
+    -> Configuration file for defining tasks.
+
+
+    src/weather_crew/tools/custom_tools.py:
+    -> Contains custom tools used by the agents.
+
+Upon running the main.py script, the following results are saved:
+
+    src/weather_crew/results/weather_forecast.md:
+    -> Weather forecast for the specified location and date.
+
+
+    src/weather_crew/results/activities_suggestion.md:
+    -> Suggested activities for the location, date based on the weather forecast, including a brief description of the activities, why the activity is suitable for the weather forecast, and potential reviews/ratings.
+
 ## 🔄 Status
 
 Project is: In Progress

@@ -57,7 +57,7 @@ class WeatherCrew:
         """
         return Task(
             config=self.tasks_config["weather_collection_task"],
-            output_file="/weather_forecast_results/weather_forecast.md",
+            output_file="/results/weather_forecast.md",
         )
 
     @task
@@ -67,7 +67,7 @@ class WeatherCrew:
         """
         return Task(
             config=self.tasks_config["activities_planning_task"],
-            output_file="/weather_forecast_results/activities_suggestion.md",
+            output_file="/results/activities_suggestion.md",
         )
 
     @crew
