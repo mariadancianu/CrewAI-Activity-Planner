@@ -5,6 +5,7 @@ Make sure to have the necessary environment variables set up for the API keys an
 """
 
 import warnings
+
 from crew import WeatherCrew
 
 warnings.filterwarnings("ignore", category=SyntaxWarning, module="pysbd")
@@ -14,10 +15,10 @@ def run():
     """
     Run the weather forecast crew.
     """
-    
+
     inputs = {
         "location": "Milan",  # This will be passed directly to the get_weather function
-        "date": "today", # TODO: add support for dates input 
+        "date": "2024-03-20",  # TODO: add support for dates input, this is just a placeholder for now
     }
 
     # Create and run the crew

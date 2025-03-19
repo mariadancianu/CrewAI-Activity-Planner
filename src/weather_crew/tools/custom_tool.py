@@ -149,11 +149,11 @@ def get_weather(city: str = "Milan") -> Dict[str, Any]:
             - "temperature_max" (int): Maximum temperature in Celsius.
     """
 
-    endpoint = "http://dataservice.accuweather.com"
-    location_id = accuweather_get_city_location_key(endpoint, city=city)
-    result = accuweather_get_forecast_one_day(endpoint, location_id=location_id)
+    # endpoint = "http://dataservice.accuweather.com"
+    # location_id = accuweather_get_city_location_key(endpoint, city=city)
+    # result = accuweather_get_forecast_one_day(endpoint, location_id=location_id)
 
-    # result = {"forecast": "sunny"}
+    result = {"temperature_min": "15", "temperature_max": "25", "weather_text": "Sunny"}
 
     return result
 
