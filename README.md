@@ -13,8 +13,8 @@ This project was designed to explore CrewAI, even though a crew workflow isn't s
 
 ## 🎯 Objectives
 
-- Understand CrewAI’s agent-based AI framework.
-- Implement a simple AI agent that retrieves weather data from an API.
+- Understand CrewAI’s agent-based AI framework, including Crews, Agents, Tasks and Tools.
+- Implement a simple AI agent that uses a custom Tool for weather data API calls. 
 - Explore collaborative agent workflows for enhanced decision-making.
 
 ## 🛠️ Tech Stack
