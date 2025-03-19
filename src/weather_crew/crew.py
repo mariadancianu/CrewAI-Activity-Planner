@@ -8,11 +8,6 @@ from crewai.project import CrewBase, agent, crew, task
 from crewai_tools import ScrapeWebsiteTool, SerperDevTool
 from tools.custom_tool import get_weather
 
-# TODO: based on the weather forecast, suggest some interesting activities for the given city and date
-# ie if rainy, suggest indoor activities, if sunny suggest both outdoor and indoor activities.
-# This involves using web scraping tools and decision making based on weather forecast
-# Output of one step must be used as input for the next step
-
 
 @CrewBase
 class WeatherCrew:
