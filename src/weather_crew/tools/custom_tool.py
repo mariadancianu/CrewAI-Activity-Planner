@@ -153,7 +153,8 @@ def get_weather(city: str = "Milan") -> Dict[str, Any]:
     # location_id = accuweather_get_city_location_key(endpoint, city=city)
     # result = accuweather_get_forecast_one_day(endpoint, location_id=location_id)
 
-    result = {"temperature_min": "15", "temperature_max": "25", "weather_text": "Sunny"}
+    # TODO: remove, testing purposes only
+    result = {"temperature_min": "15", "temperature_max": "25", "weather_text": "Rainy"}
 
     return result
 

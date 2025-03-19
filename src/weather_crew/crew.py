@@ -5,6 +5,7 @@ with the provided tools and configurations.
 
 from crewai import Agent, Crew, Process, Task
 from crewai.project import CrewBase, agent, crew, task
+from crewai_tools import ScrapeWebsiteTool, SerperDevTool
 from tools.custom_tool import get_weather
 
 # TODO: based on the weather forecast, suggest some interesting activities for the given city and date
@@ -34,15 +35,18 @@ class WeatherCrew:
         )
 
     @agent
-    def activities_searcher(self) -> Agent:
+    def activities_planner(self) -> Agent:
         """
         Creates the Activities Searcher agent.
         """
         return Agent(
-            config=self.agents_config["activities_searcher"],
+            config=self.agents_config["activities_planner"],
             verbose=True,
             max_iter=3,  # Maximum iterations before the agent must provide its best answer. Default is 20.
-            # tools=[], # what tools should be used for this Agent?
+            tools=[
+                SerperDevTool(),  # search the internet and return the most relevant results.
+                ScrapeWebsiteTool(),
+            ],
             # allow_delegation=False,
         )
 
@@ -52,17 +56,17 @@ class WeatherCrew:
         Creates the weather_collection task.
         """
         return Task(
-            config=self.tasks_config["weather_collection"],
+            config=self.tasks_config["weather_collection_task"],
             output_file="/weather_forecast_results/weather_forecast.md",
         )
 
     @task
-    def activities_suggestion(self) -> Task:
+    def activities_planning_task(self) -> Task:
         """
         Creates the activities_suggestion task.
         """
         return Task(
-            config=self.tasks_config["activities_suggestion"],
+            config=self.tasks_config["activities_planning_task"],
             output_file="/weather_forecast_results/activities_suggestion.md",
         )
 

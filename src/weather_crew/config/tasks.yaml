@@ -1,4 +1,4 @@
-weather_collection:
+weather_collection_task:
   description: >
     Collect the weather forecast for {location} on {date}.
 # Use the get_weather tool with the city name directly as a string argument:
@@ -7,10 +7,23 @@ weather_collection:
     The weather forecast for {location} on {date} is {forecast}.
   agent: weather_assistant
 
-activities_suggestion:
+activities_planning_task:
   description: >
-    Collect and suggest a list of potential activities for the city {location} on {date} based
-    on the weather forecast: {forecast}.
+    Research and find cool things to do at {location}.
+    Focus on activities and events that match the weather forecast.
+    Utilize internet search tools and recommendation engines to gather the information.
+
+    Traveler's information:
+
+    - location: {location}
+
+    - date: {date}
+
+#  - weather forecast: {forecast}
+
   expected_output: >
-    List of activities for the city {location} on {date} based on the weather forecast {forecast}: {activities}.
-  agent: activities_searcher
+    A list of recommended activities and events for the location and date.
+    Each entry should include the activity name, location, a brief description and why it is appropriate
+    for the weather forecast.
+    And potential reviews and ratings of the activities.
+  agent: activities_planner
