@@ -5,16 +5,15 @@
 
 ## 📌 Project Overview
 
-This project explores basic agentic AI workflows using [CrewAI](https://www.crewai.com/).
+This project explores basic agentic AI workflows using [CrewAI](https://www.crewai.com/), as a learning exercise.
 
-The primary goal is to learn and test how AI agents can autonomously retrieve and process weather data using APIs, all while leveraging CrewAI's capabilities for multi-agent collaboration and decision-making.
+The primary goal is to learn and test how AI agents can autonomously retrieve and process weather data using APIs, all while leveraging CrewAI's capabilities for multi-agent collaboration and decision-making. To extend the project further, I introduced an additional agent that suggests engaging indoor or outdoor activities for a given date and city based on weather conditions. This involves web scraping and decision-making based on weather forecasts.
 
-This project was designed to explore CrewAI, even though a crew workflow isn't strictly necessary for this specific use case. The goal was to gain hands-on experience and understand its potential applications.
 
 ## 🎯 Objectives
 
 - Understand CrewAI’s agent-based AI framework, including Crews, Agents, Tasks and Tools.
-- Implement a simple AI agent that uses a custom Tool for weather data API calls. 
+- Implement a simple AI agent that uses a custom Tool for weather data API calls.
 - Explore collaborative agent workflows for enhanced decision-making.
 
 ## 🛠️ Tech Stack

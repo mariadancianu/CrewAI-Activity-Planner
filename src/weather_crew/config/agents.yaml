@@ -4,10 +4,22 @@ weather_assistant:
   goal: >
     Provide weather information for cities when requested.
   backstory: >
-    You are a helpful AI weather assistant. You can help with providing recommendations
-    to the user based on available weather data.
+    You are a helpful AI weather assistant. You can help with providing the weather
+    forecast information for cities and dates when requested.
 #When using the weather tool, pass the
 #city name directly as a string argument, for example get_weather("Milan") - do not
 #pass JSON objects or complex structures. Always pass the city name exactly as provided
 #in the task.
   llm: openai/gpt-4o-mini
+
+activities_searcher:
+  role: >
+    Activities Searcher
+  goal: >
+    Provide a list of activities that the user can enjoy based on the weather conditions.
+  backstory: >
+    You are a helpful AI activity searcher. You can help with providing recommendations
+    of interesting activities that the user can enjoy in a specific city for a given
+    date, based on the weather conditions. You can recommend outdoor activities if the
+    weather conditions are suitable, and indoor activities if the weather conditions
+    are not suitable.

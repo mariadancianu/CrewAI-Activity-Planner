@@ -6,3 +6,11 @@ weather_collection:
   expected_output: >
     The weather forecast for {location} on {date} is {forecast}.
   agent: weather_assistant
+
+activities_suggestion:
+  description: >
+    Collect and suggest a list of potential activities for the city {location} on {date} based
+    on the weather forecast: {forecast}.
+  expected_output: >
+    List of activities for the city {location} on {date} based on the weather forecast {forecast}: {activities}.
+  agent: activities_searcher

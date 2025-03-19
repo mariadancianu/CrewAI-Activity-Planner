@@ -7,8 +7,10 @@ from crewai import Agent, Crew, Process, Task
 from crewai.project import CrewBase, agent, crew, task
 from tools.custom_tool import get_weather
 
-
-# TODO: experiment with addition of tool to save the weather results into a json file 
+# TODO: based on the weather forecast, suggest some interesting activities for the given city and date
+# ie if rainy, suggest indoor activities, if sunny suggest both outdoor and indoor activities.
+# This involves using web scraping tools and decision making based on weather forecast
+# Output of one step must be used as input for the next step
 
 
 @CrewBase
@@ -26,8 +28,21 @@ class WeatherCrew:
         return Agent(
             config=self.agents_config["weather_assistant"],
             verbose=True,
-            tools=[get_weather], # use the custom tool for weather forecast API calls
+            tools=[get_weather],  # use the custom tool for weather forecast API calls
             max_iter=3,  # Maximum iterations before the agent must provide its best answer. Default is 20.
+            # allow_delegation=False,
+        )
+
+    @agent
+    def activities_searcher(self) -> Agent:
+        """
+        Creates the Activities Searcher agent.
+        """
+        return Agent(
+            config=self.agents_config["activities_searcher"],
+            verbose=True,
+            max_iter=3,  # Maximum iterations before the agent must provide its best answer. Default is 20.
+            # tools=[], # what tools should be used for this Agent?
             # allow_delegation=False,
         )
 
@@ -36,7 +51,20 @@ class WeatherCrew:
         """
         Creates the weather_collection task.
         """
-        return Task(config=self.tasks_config["weather_collection"])
+        return Task(
+            config=self.tasks_config["weather_collection"],
+            output_file="/weather_forecast_results/weather_forecast.md",
+        )
+
+    @task
+    def activities_suggestion(self) -> Task:
+        """
+        Creates the activities_suggestion task.
+        """
+        return Task(
+            config=self.tasks_config["activities_suggestion"],
+            output_file="/weather_forecast_results/activities_suggestion.md",
+        )
 
     @crew
     def crew(self) -> Crew:
