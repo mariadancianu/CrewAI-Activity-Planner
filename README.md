@@ -1,4 +1,4 @@
-# CrewAI Agentic AI - Weather Assistant
+# CrewAI Agentic AI - Activity Planner based on Weather Forecast
 
 ![CrewAI Agentic AI - Weather Assistant](images/img.png)
 
