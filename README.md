@@ -6,7 +6,18 @@
 ## 📌 Project Overview
 
 
-This project explores basic agentic AI workflows using [CrewAI](https://www.crewai.com/) as a hands-on learning experiment. The primary goal is to learn by doing—testing how AI agents can autonomously retrieve and process weather data through API calls while leveraging CrewAI's capabilities for multi-agent collaboration and decision-making. Additionally, the experiment includes web search and scraping for activity planning, where an agent suggests engaging indoor or outdoor activities for a given date and city based on real-time weather forecasts.
+This project takes a hands-on approach to explore the power of agentic AI workflows using [CrewAI](https://www.crewai.com/). The main objective is to learn by doing and test how AI agents can autonomously retrieve and process weather data via API calls while leveraging CrewAI’s capabilities for multi-agent collaboration and decision-making.
+
+Additionally, the project includes an Activity Planner, where an AI agent suggests indoor or outdoor activities based on real-time weather forecasts, user interests, and a selected date range and city.
+
+The Streamlit application provides an interactive experience, allowing users to input their preferences, view weather forecasts, and receive activity recommendations, with the option to download the downloaded activities.
+
+Below is a preview of how the application looks:
+
+![](images/activity_planner_1.png)
+![](images/activity_planner_2.png)
+![](images/activity_planner_3.png)
+
 
 ## 🎯 Objectives
 
