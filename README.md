@@ -10,14 +10,15 @@ This project takes a hands-on approach to explore the power of agentic AI workfl
 
 Additionally, the project includes an Activity Planner, where an AI agent suggests indoor or outdoor activities based on real-time weather forecasts, user interests, and a selected date range and city.
 
-The Streamlit application provides an interactive experience, allowing users to input their preferences, view weather forecasts, and receive activity recommendations, with the option to download the downloaded activities.
+The Streamlit application provides an interactive experience, allowing users to input their preferences, view weather forecasts, and receive activity recommendations, with the option to download the suggested activities. You can access the deployed app [here](https://crewai-activity-planner-aujjnndpfyz9lpfzkxvlmg.streamlit.app/).
 
-Below is a preview of how the application looks:
+Below is a preview of the application interface. Please note that the discrepancies related to the city and dates are temporary and due to ongoing development.
 
 ![](images/activity_planner_1.png)
 ![](images/activity_planner_2.png)
 ![](images/activity_planner_3.png)
 
+As this project is still in progress, there may be occasional performance inconsistencies. However, I'm actively working on fine-tuning the system for a more optimized and seamless user experience.
 
 ## 🎯 Objectives
 
