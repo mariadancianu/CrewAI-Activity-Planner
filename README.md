@@ -20,6 +20,7 @@ This project explores basic agentic AI workflows using [CrewAI](https://www.crew
 - CrewAI
 - OpenAI API
 - [AccuWeather API](https://developer.accuweather.com/) (or any weather API of choice)
+- Streamlit
 
 
 ## Details

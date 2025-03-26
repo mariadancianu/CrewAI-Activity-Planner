@@ -31,6 +31,33 @@ def get_json_data(url: str) -> Dict[str, Any]:
     return data
 
 
+def get_supported_locations(url: str) -> Dict[str, Any]:
+    """Gets the supported cities for which the activity planner is available.
+
+    Args:
+      url: str
+        AccuWeather API endpoint URL.
+    Returns:
+      supported_cities_dict: Dict[str, Any]
+        Supported cities with their location keys and localized names.
+
+    """
+
+    url = f"{url}/locations/v1/topcities/150?apikey={ACCUWEATHER_API_KEY}"
+
+    top_cities_data = get_json_data(url)
+
+    supported_locations = [
+        {
+            "city_name": city["LocalizedName"],
+            "country_name": city["Country"]["LocalizedName"],
+            "administrative_area_name": city["AdministrativeArea"]["LocalizedName"],
+        }
+        for city in top_cities_data
+    ]
+    return supported_locations
+
+
 def accuweather_get_forecast_one_day(url: str, location_id: int) -> Dict[str, Any]:
     """Get the weather forecast for the next day.
 

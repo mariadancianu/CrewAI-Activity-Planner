@@ -6,7 +6,8 @@ with the provided tools and configurations.
 from crewai import Agent, Crew, Process, Task
 from crewai.project import CrewBase, agent, crew, task
 from crewai_tools import ScrapeWebsiteTool, SerperDevTool
-from tools.custom_tool import get_weather
+
+from src.weather_crew.tools.custom_tool import get_weather
 
 
 @CrewBase
