@@ -265,7 +265,6 @@ uvloop==0.21.0
 virtualenv==20.29.2
 watchfiles==1.0.4
 wcwidth==0.2.13
--e file:///Users/mariadancianu/Desktop/GitProjects/CrewAI-Activity-Planner
 webcolors==24.11.1
 webencodings==0.5.1
 websocket-client==1.8.0

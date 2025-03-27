@@ -1,7 +1,9 @@
-__import__("pysqlite3")
-import sys
+# __import__("pysqlite3")
+# import sys
 
-sys.modules["sqlite3"] = sys.modules.pop("pysqlite3")
+# sys.modules["sqlite3"] = sys.modules.pop("pysqlite3")
+
+import datetime
 
 import streamlit as st
 
@@ -12,6 +14,11 @@ accuweather_endpoint = "http://dataservice.accuweather.com"
 
 # Title of the app
 st.title("🌤️ Activity Planner")
+
+today = datetime.date.today()
+max_date = today + datetime.timedelta(
+    days=5
+)  # Limit the date range to 5 days due to free option weather API limitations
 
 # Expander for user inputs
 with st.expander("Select Your Preferences"):
@@ -27,8 +34,13 @@ with st.expander("Select Your Preferences"):
     # TODO: add support for user-defined date range in the activity planner agent
     # This is just a placeholder for now
     st.markdown("#### Select a date range for your activity:")
-    start_date = st.date_input("Start Date:", value=None, key="start_date")
-    end_date = st.date_input("End Date:", value=None, key="end_date")
+    start_date = st.date_input(
+        "Start Date:", value=None, min_value=today, max_value=max_date, key="start_date"
+    )
+
+    end_date = st.date_input(
+        "End Date:", value=None, min_value=today, max_value=max_date, key="end_date"
+    )
 
     # Multiple options checkbox
     # TODO: add support for user personal interests in the activity planner agent
@@ -81,9 +93,9 @@ if st.button("Confirm and Run"):
         for day in weather_data:
             condition_icon = (
                 "☀️"
-                if day["Condition"] == "Sunny"
+                if "sunny" in day["Condition"].lower()  # == "Sunny"
                 else "🌧️"
-                if day["Condition"] == "Rainy"
+                if "rainy" in day["Condition"].lower()  # == "Rainy"
                 else "☁️"
             )
             st.write(f"{day['Date']}: {condition_icon} {day['Condition']}")

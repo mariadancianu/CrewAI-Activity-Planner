@@ -13,8 +13,11 @@ warnings.filterwarnings("ignore", category=SyntaxWarning, module="pysbd")
 
 
 def run(
-    location: str = "Milan",
-    date: str = "2024-03-20",  # TODO: add support for dates input, this is just a placeholder for now):
+    city: str = "Milan",
+    country: str = "IT",
+    administrative_area: str = "Lombardy",
+    start_date: str = "2024-03-27",
+    end_date: str = "2024-03-29",
     user_interests: List = None,
 ):  # TODO: add support for user interests, this is just a placeholder for now
     """
@@ -23,15 +26,24 @@ def run(
     Args:
       location: str, optional, Default = 'Milan'
         Desired city location.
-      date: str, optional, Default = '2024-03-20'
-        Desired date for the weather forecast.
+      country: str, optional, Default = 'IT'
+        Country ID of the country where of the city.
+      administrative_area: str, optional, Default = 'Lombardy'
+        Administrative area of the city.
+      start_date: str, optional, Default = '2024-03-20'
+        Desired start date for the weather forecast.
+      end_date: str, optional, Default = '2024-03-20'
+        Desired end date for the weather forecast.
       user_interests: List[str], optional, Default = None
         List of personal interests for the activities planner.
     """
 
     inputs = {
-        "location": location,
-        "date": date,
+        "city": city,
+        "country": country,
+        "administrative_area": administrative_area,
+        "start_date": start_date,
+        "end_date": end_date,
         "user_interests": user_interests,
     }
 

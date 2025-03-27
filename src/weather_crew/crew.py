@@ -26,7 +26,7 @@ class WeatherCrew:
             config=self.agents_config["weather_assistant"],
             verbose=True,
             tools=[get_weather],  # use the custom tool for weather forecast API calls
-            max_iter=3,  # Maximum iterations before the agent must provide its best answer. Default is 20.
+            max_iter=1,  # Maximum iterations before the agent must provide its best answer. Default is 20.
             # allow_delegation=False,
         )
 

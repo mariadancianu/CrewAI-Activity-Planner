@@ -1,3 +1,4 @@
+import datetime
 import json
 import os
 import urllib
@@ -58,7 +59,7 @@ def get_supported_locations(url: str) -> Dict[str, Any]:
     return supported_locations
 
 
-def accuweather_get_forecast_one_day(url: str, location_id: int) -> Dict[str, Any]:
+def accuweather_get_forecast(url: str, location_id: int) -> Dict[str, Any]:
     """Get the weather forecast for the next day.
 
     Args:
@@ -75,43 +76,57 @@ def accuweather_get_forecast_one_day(url: str, location_id: int) -> Dict[str, An
             - "temperature_max" (int): Maximum temperature in Celsius.
     """
 
-    url = f"{url}/forecasts/v1/daily/1day/{location_id}?apikey={ACCUWEATHER_API_KEY}"
+    days = 5
+    url = (
+        f"{url}/forecasts/v1/daily/{days}day/{location_id}?apikey={ACCUWEATHER_API_KEY}"
+    )
     data = get_json_data(url)
 
-    weather_text = data.get("Headline", {}).get("Text", None)
+    # with open(f"test_weather_data_{days}day.json", "w") as f:
+    #    json.dump(data, f, indent=4)
+
     daily_forecasts_list = data.get("DailyForecasts", [])
 
-    if len(daily_forecasts_list) == 0:
-        daily_forecasts_dict = {}
-    else:
-        daily_forecasts_dict = daily_forecasts_list[0]
+    weather_forecast_list = []
 
-    temperature_min = (
-        daily_forecasts_dict.get("Temperature", {})
-        .get("Minimum", {})
-        .get("Value", None)
-    )
-    temperature_max = (
-        daily_forecasts_dict.get("Temperature", {})
-        .get("Maximum", {})
-        .get("Value", None)
-    )
+    for daily_forecast in daily_forecasts_list:
+        date = daily_forecast["Date"]
+        date_format = "%Y-%m-%dT%H:%M:%S%z"
 
-    # convert fahrenheit to celsius
-    if temperature_min is not None:
-        temperature_min = (temperature_min - 32) * 5 / 9
-        temperature_min = round(temperature_min)
+        date = datetime.datetime.strptime(date, date_format).strftime("%Y-%m-%d")
 
-    if temperature_max is not None:
-        temperature_max = (temperature_max - 32) * 5 / 9
-        temperature_max = round(temperature_max)
+        daily_weather_text = daily_forecast["Day"]["IconPhrase"]
 
-    weather_forecast_dict = {}
-    weather_forecast_dict["weather_text"] = weather_text
-    weather_forecast_dict["temperature_min"] = temperature_min
-    weather_forecast_dict["temperature_max"] = temperature_max
+        temperature_min = (
+            daily_forecast.get("Temperature", {}).get("Minimum", {}).get("Value", None)
+        )
+        temperature_max = (
+            daily_forecast.get("Temperature", {}).get("Maximum", {}).get("Value", None)
+        )
 
-    return weather_forecast_dict
+        # convert fahrenheit to celsius
+        if temperature_min is not None:
+            temperature_min = (temperature_min - 32) * 5 / 9
+            temperature_min = round(temperature_min)
+
+        if temperature_max is not None:
+            temperature_max = (temperature_max - 32) * 5 / 9
+            temperature_max = round(temperature_max)
+
+        weather_forecast_list.append(
+            {
+                "Date": date,
+                "temperature_min": temperature_min,
+                "temperature_max": temperature_max,
+                "weather_text": daily_weather_text,
+            }
+        )
+
+    # weather_forecast_dict["weather_text"] = daily_weather_text
+    # weather_forecast_dict["temperature_min"] = temperature_min
+    # weather_forecast_dict["temperature_max"] = temperature_max
+
+    return weather_forecast_list
 
 
 def accuweather_get_city_location_key(
@@ -160,13 +175,30 @@ def accuweather_get_city_location_key(
 
 
 @tool("get_weather")
-def get_weather(city: str = "Milan") -> Dict[str, Any]:
+def get_weather(
+    city: str = "Milan",
+    country: str = "IT",
+    administrative_area_localized_name: str = "Lombardy",
+    start_date: str = "2025-03-27",
+    end_date: str = "2025-03-29",
+) -> Dict[str, Any]:
     """
     Get weather forecast for the given city.
 
     Args:
         city: str
           The name of the city to get weather for (e.g., "Milan", "Rome")
+        country_id: str, optional, Default= 'IT'
+          AccuWeather ID of the country where of the city. Here we limit
+          the search to Italy only. To change this check out the AccuWeather
+          API documentation.
+        administrative_area_localized_name: str, optional, Default = 'Lombardy'
+          AccuWeather localized name of the administrative area of the
+          city. To change this check out the AccuWeather API documentation.
+        start_date: str, optional, Default = '2024-03-20'
+          Desired start date for the weather forecast.
+        end_date: str, optional, Default = '2024-03-20'
+          Desired end date for the weather forecast.
 
     Returns:
     result: Dict[str, Any]
@@ -176,12 +208,47 @@ def get_weather(city: str = "Milan") -> Dict[str, Any]:
             - "temperature_max" (int): Maximum temperature in Celsius.
     """
 
-    # endpoint = "http://dataservice.accuweather.com"
-    # location_id = accuweather_get_city_location_key(endpoint, city=city)
-    # result = accuweather_get_forecast_one_day(endpoint, location_id=location_id)
+    # The weather forecast must be in the future from today and not more than 5 days in the future.
+    # (due to free AccuWeather API's limitations)
+    start_date_min = datetime.date.today()
+    end_date_max = datetime.date.today() + datetime.timedelta(days=5)
+
+    start_date = datetime.datetime.strptime(start_date, "%Y-%m-%d").date()
+    end_date = datetime.datetime.strptime(end_date, "%Y-%m-%d").date()
+
+    print(f"Start date min allowed {start_date_min}")
+    print(f"End date max allowed {end_date_max}")
+
+    if start_date < start_date_min or start_date > end_date_max:
+        print(f"Start date must be between {start_date_min} and {end_date_max}")
+        start_date = start_date_min
+
+    if end_date < start_date_min or end_date > end_date_max:
+        print(f"End date must be between {start_date_min} and {end_date_max}")
+        end_date = end_date_max
+
+    print(
+        f"Getting weather forecast for {city}, {country}, {administrative_area_localized_name} between {start_date} and {end_date}"
+    )
+
+    endpoint = "http://dataservice.accuweather.com"
+
+    location_id = accuweather_get_city_location_key(
+        endpoint,
+        city=city,
+        country_id=country,
+        administrative_area_localized_name=administrative_area_localized_name,
+    )
+    result = accuweather_get_forecast(endpoint, location_id=location_id)
+
+    for idx, res in enumerate(result):
+        date = res["Date"]
+
+        if date < start_date or date > end_date:
+            del result[idx]
 
     # TODO: remove, testing purposes only
-    result = {"temperature_min": "15", "temperature_max": "25", "weather_text": "Rainy"}
+    # result = {"temperature_min": "15", "temperature_max": "25", "weather_text": "Rainy"}
 
     return result
 

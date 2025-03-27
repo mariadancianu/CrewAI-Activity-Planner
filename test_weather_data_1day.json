@@ -1,0 +1,46 @@
+{
+    "Headline": {
+        "EffectiveDate": "2025-03-30T07:00:00+01:00",
+        "EffectiveEpochDate": 1743314400,
+        "Severity": 4,
+        "Text": "Pleasant Sunday",
+        "Category": "mild",
+        "EndDate": null,
+        "EndEpochDate": null,
+        "MobileLink": "http://www.accuweather.com/en/it/milan/214046/daily-weather-forecast/214046?lang=en-us",
+        "Link": "http://www.accuweather.com/en/it/milan/214046/daily-weather-forecast/214046?lang=en-us"
+    },
+    "DailyForecasts": [
+        {
+            "Date": "2025-03-27T07:00:00+01:00",
+            "EpochDate": 1743055200,
+            "Temperature": {
+                "Minimum": {
+                    "Value": 46.0,
+                    "Unit": "F",
+                    "UnitType": 18
+                },
+                "Maximum": {
+                    "Value": 71.0,
+                    "Unit": "F",
+                    "UnitType": 18
+                }
+            },
+            "Day": {
+                "Icon": 4,
+                "IconPhrase": "Intermittent clouds",
+                "HasPrecipitation": false
+            },
+            "Night": {
+                "Icon": 34,
+                "IconPhrase": "Mostly clear",
+                "HasPrecipitation": false
+            },
+            "Sources": [
+                "AccuWeather"
+            ],
+            "MobileLink": "http://www.accuweather.com/en/it/milan/214046/daily-weather-forecast/214046?day=1&lang=en-us",
+            "Link": "http://www.accuweather.com/en/it/milan/214046/daily-weather-forecast/214046?day=1&lang=en-us"
+        }
+    ]
+}
