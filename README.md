@@ -16,7 +16,7 @@ The Streamlit application provides an interactive experience, allowing users to 
 You can access the deployed app [here](https://crewai-activity-planner-aujjnndpfyz9lpfzkxvlmg.streamlit.app/).
 -->
 
-Below is a preview of the application interface. Please note that the discrepancies related to the city and dates are temporary and due to ongoing development.
+Below is a preview of the application interface.
 
 ![](images/activity_planner_1.png)
 ![](images/activity_planner_2.png)

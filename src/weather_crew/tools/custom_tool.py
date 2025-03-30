@@ -11,8 +11,6 @@ load_dotenv()
 
 ACCUWEATHER_API_KEY = os.environ.get("ACCUWEATHER_API_KEY")
 
-# TODO: add support for multiple cities and dates
-
 
 def get_json_data(url: str) -> Dict[str, Any]:
     """Gets the json data through an API.
@@ -32,7 +30,7 @@ def get_json_data(url: str) -> Dict[str, Any]:
     return data
 
 
-def get_supported_locations(url: str) -> Dict[str, Any]:
+def get_supported_locations(url: str, use_api: bool = False) -> Dict[str, Any]:
     """Gets the supported cities for which the activity planner is available.
 
     Args:
@@ -44,18 +42,34 @@ def get_supported_locations(url: str) -> Dict[str, Any]:
 
     """
 
-    url = f"{url}/locations/v1/topcities/150?apikey={ACCUWEATHER_API_KEY}"
+    if use_api:
+        url = f"{url}/locations/v1/topcities/150?apikey={ACCUWEATHER_API_KEY}"
 
-    top_cities_data = get_json_data(url)
+        top_cities_data = get_json_data(url)
 
-    supported_locations = [
-        {
-            "city_name": city["LocalizedName"],
-            "country_name": city["Country"]["LocalizedName"],
-            "administrative_area_name": city["AdministrativeArea"]["LocalizedName"],
-        }
-        for city in top_cities_data
-    ]
+        supported_locations = [
+            {
+                "city_name": city["LocalizedName"],
+                "country_name": city["Country"]["LocalizedName"],
+                "administrative_area_name": city["AdministrativeArea"]["LocalizedName"],
+            }
+            for city in top_cities_data
+        ]
+    else:
+        # debugging purposes only, when we reach the weather API calls limitation
+        supported_locations = [
+            {
+                "city_name": "Rome",
+                "country_name": "Italy",
+                "administrative_area_name": "Lazio",
+            },
+            {
+                "city_name": "Milan",
+                "country_name": "Italy",
+                "administrative_area_name": "Lombardy",
+            },
+        ]
+
     return supported_locations
 
 
@@ -188,6 +202,7 @@ def get_weather(
     administrative_area_localized_name: str = "Lombardy",
     start_date: str = "2025-03-27",
     end_date: str = "2025-03-29",
+    use_api: bool = False,
 ) -> Dict[str, Any]:
     """
     Get weather forecast for the given city.
@@ -240,15 +255,22 @@ def get_weather(
 
     endpoint = "http://dataservice.accuweather.com"
 
-    location_id = accuweather_get_city_location_key(
-        endpoint,
-        city=city,
-        country_id=country,
-        administrative_area_localized_name=administrative_area_localized_name,
-    )
+    use_api = False
 
     # TODO: set use_api=True (this is set to False only for debugging purposes)
-    result = accuweather_get_forecast(endpoint, location_id=location_id, use_api=False)
+    if use_api:
+        location_id = accuweather_get_city_location_key(
+            endpoint,
+            city=city,
+            country_id=country,
+            administrative_area_localized_name=administrative_area_localized_name,
+        )
+    else:
+        location_id = None
+
+    result = accuweather_get_forecast(
+        endpoint, location_id=location_id, use_api=use_api
+    )
 
     for idx, res in enumerate(result):
         date = res["Date"]

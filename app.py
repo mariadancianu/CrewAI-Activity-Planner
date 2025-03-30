@@ -4,6 +4,7 @@
 # sys.modules["sqlite3"] = sys.modules.pop("pysqlite3")
 
 import datetime
+import json
 
 import streamlit as st
 
@@ -89,22 +90,23 @@ if st.button("Confirm and Run"):
             )
 
         st.markdown("### Weather Forecast")
-        # TODO: this is a placeholder, replace with actual weather data retrieval
-        weather_data = [
-            {"Date": "2025-03-26", "Condition": "Sunny"},
-            {"Date": "2025-03-27", "Condition": "Rainy"},
-            {"Date": "2025-03-28", "Condition": "Cloudy"},
-        ]
+
+        filename = "results/weather_forecast.json"
+
+        with open(filename, "r") as f:
+            weather_data = json.load(f)
 
         for day in weather_data:
             condition_icon = (
                 "☀️"
-                if "sunny" in day["Condition"].lower()  # == "Sunny"
+                if "sunny" in day["weather_text"].lower()  # == "Sunny"
                 else "🌧️"
-                if "rainy" in day["Condition"].lower()  # == "Rainy"
+                if "rainy" in day["weather_text"].lower()  # == "Rainy"
                 else "☁️"
             )
-            st.write(f"{day['Date']}: {condition_icon} {day['Condition']}")
+            st.write(
+                f"{day['date']}: {condition_icon} {day['weather_text']}, Mimimum temperature: {day['temperature_min']}, Maximum temperature: {day['temperature_max']}"
+            )
 
         st.markdown("### Activity Planner Output")
         st.markdown(output)

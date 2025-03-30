@@ -53,7 +53,7 @@ class WeatherCrew:
         """
         return Task(
             config=self.tasks_config["weather_collection_task"],
-            output_file="/results/weather_forecast.md",
+            output_file="/results/weather_forecast.json",
         )
 
     @task

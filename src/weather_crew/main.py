@@ -19,7 +19,7 @@ def run(
     start_date: str = "2024-03-27",
     end_date: str = "2024-03-29",
     user_interests: List = None,
-):  # TODO: add support for user interests, this is just a placeholder for now
+):
     """
     Run the weather forecast crew.
 
