@@ -30,7 +30,7 @@ def get_json_data(url: str) -> Dict[str, Any]:
     return data
 
 
-def get_supported_locations(url: str, use_api: bool = False) -> Dict[str, Any]:
+def get_supported_locations(url: str, use_api: bool = True) -> Dict[str, Any]:
     """Gets the supported cities for which the activity planner is available.
 
     Args:
@@ -202,7 +202,7 @@ def get_weather(
     administrative_area_localized_name: str = "Lombardy",
     start_date: str = "2025-03-27",
     end_date: str = "2025-03-29",
-    use_api: bool = False,
+    use_api: bool = True,
 ) -> Dict[str, Any]:
     """
     Get weather forecast for the given city.
@@ -255,7 +255,7 @@ def get_weather(
 
     endpoint = "http://dataservice.accuweather.com"
 
-    use_api = False
+    # use_api = False
 
     # TODO: set use_api=True (this is set to False only for debugging purposes)
     if use_api:
