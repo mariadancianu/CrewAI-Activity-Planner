@@ -1,1 +1,1 @@
-The weather forecast for Milan, IT, Lombardy on 2024-03-20 is unavailable at this time.
+- [{date: "2025-03-30", weather_text: "Intermittent clouds", temperature_min: 12, temperature_max: 23}, {date: "2025-03-31", weather_text: "Sunny", temperature_min: 7, temperature_max: 21}]
