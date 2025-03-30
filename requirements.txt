@@ -156,6 +156,7 @@ pypika==0.48.9
 pyproject-hooks==1.2.0
 pyright==1.1.398
 pysbd==0.3.4
+pysqlite3-binary==0.5.4
 python-dateutil==2.9.0.post0
 python-dotenv==1.1.0
 pytube==15.0.0
