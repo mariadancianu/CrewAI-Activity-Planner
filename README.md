@@ -12,9 +12,7 @@ Additionally, the project includes an Activity Planner, where an AI agent sugges
 
 The Streamlit application provides an interactive experience, allowing users to input their preferences, view weather forecasts, and receive activity recommendations, with the option to download the suggested activities.
 
-<!--
 You can access the deployed app [here](https://crewai-activity-planner-aujjnndpfyz9lpfzkxvlmg.streamlit.app/).
--->
 
 Below is a preview of the application interface.
 
@@ -23,6 +21,8 @@ Below is a preview of the application interface.
 ![](images/activity_planner_3.png)
 
 As this project is still in progress, there may be occasional performance inconsistencies. However, I'm actively working on fine-tuning the system for a more optimized and seamless user experience.
+
+Additionally, the free package of the weather API has a limit of 50 calls per day. Exceeding this limit will result in an HTTP error.
 
 ## 🎯 Objectives
 
