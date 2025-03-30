@@ -24,15 +24,16 @@ max_date = today + datetime.timedelta(
 with st.expander("Select Your Preferences"):
     # Dropdown menu
     options = get_supported_locations(accuweather_endpoint)
-    options = [f"{option['city_name']}, {option['country_name']}" for option in options]
+    options = [
+        f"{option['city_name']}, {option['country_name']}, {option['administrative_area_name']}"
+        for option in options
+    ]
 
     selected_option = st.selectbox(
         "Choose one of the supported cities:", ["None"] + options
     )
 
     # Date selection
-    # TODO: add support for user-defined date range in the activity planner agent
-    # This is just a placeholder for now
     st.markdown("#### Select a date range for your activity:")
     start_date = st.date_input(
         "Start Date:", value=None, min_value=today, max_value=max_date, key="start_date"
@@ -43,8 +44,6 @@ with st.expander("Select Your Preferences"):
     )
 
     # Multiple options checkbox
-    # TODO: add support for user personal interests in the activity planner agent
-    # This is just a placeholder for now
     checkbox_options = [
         "Photography",
         "Art",
@@ -80,7 +79,14 @@ if st.button("Confirm and Run"):
         )
     else:
         with st.spinner("Running the activity planner..."):
-            output = run()
+            output = run(
+                city=selected_option.split(",")[0],
+                country=selected_option.split(",")[1],
+                administrative_area=selected_option.split(",")[2],
+                start_date=start_date.strftime("%Y-%m-%d"),
+                end_date=end_date.strftime("%Y-%m-%d"),
+                user_interests=selected_interests,
+            )
 
         st.markdown("### Weather Forecast")
         # TODO: this is a placeholder, replace with actual weather data retrieval

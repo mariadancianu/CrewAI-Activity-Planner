@@ -1,27 +1,27 @@
 {
     "Headline": {
-        "EffectiveDate": "2025-03-30T07:00:00+01:00",
+        "EffectiveDate": "2025-03-30T08:00:00+02:00",
         "EffectiveEpochDate": 1743314400,
-        "Severity": 4,
-        "Text": "Pleasant Sunday",
-        "Category": "mild",
-        "EndDate": null,
-        "EndEpochDate": null,
+        "Severity": 7,
+        "Text": "Warm Sunday",
+        "Category": "heat",
+        "EndDate": "2025-03-30T20:00:00+02:00",
+        "EndEpochDate": 1743357600,
         "MobileLink": "http://www.accuweather.com/en/it/milan/214046/daily-weather-forecast/214046?lang=en-us",
         "Link": "http://www.accuweather.com/en/it/milan/214046/daily-weather-forecast/214046?lang=en-us"
     },
     "DailyForecasts": [
         {
-            "Date": "2025-03-27T07:00:00+01:00",
-            "EpochDate": 1743055200,
+            "Date": "2025-03-30T07:00:00+02:00",
+            "EpochDate": 1743310800,
             "Temperature": {
                 "Minimum": {
-                    "Value": 46.0,
+                    "Value": 53.0,
                     "Unit": "F",
                     "UnitType": 18
                 },
                 "Maximum": {
-                    "Value": 71.0,
+                    "Value": 73.0,
                     "Unit": "F",
                     "UnitType": 18
                 }
@@ -32,8 +32,8 @@
                 "HasPrecipitation": false
             },
             "Night": {
-                "Icon": 34,
-                "IconPhrase": "Mostly clear",
+                "Icon": 33,
+                "IconPhrase": "Clear",
                 "HasPrecipitation": false
             },
             "Sources": [
@@ -43,11 +43,11 @@
             "Link": "http://www.accuweather.com/en/it/milan/214046/daily-weather-forecast/214046?day=1&lang=en-us"
         },
         {
-            "Date": "2025-03-28T07:00:00+01:00",
-            "EpochDate": 1743141600,
+            "Date": "2025-03-31T07:00:00+02:00",
+            "EpochDate": 1743397200,
             "Temperature": {
                 "Minimum": {
-                    "Value": 49.0,
+                    "Value": 45.0,
                     "Unit": "F",
                     "UnitType": 18
                 },
@@ -58,13 +58,13 @@
                 }
             },
             "Day": {
-                "Icon": 6,
-                "IconPhrase": "Mostly cloudy",
+                "Icon": 1,
+                "IconPhrase": "Sunny",
                 "HasPrecipitation": false
             },
             "Night": {
-                "Icon": 35,
-                "IconPhrase": "Partly cloudy",
+                "Icon": 33,
+                "IconPhrase": "Clear",
                 "HasPrecipitation": false
             },
             "Sources": [
@@ -74,39 +74,8 @@
             "Link": "http://www.accuweather.com/en/it/milan/214046/daily-weather-forecast/214046?day=2&lang=en-us"
         },
         {
-            "Date": "2025-03-29T07:00:00+01:00",
-            "EpochDate": 1743228000,
-            "Temperature": {
-                "Minimum": {
-                    "Value": 47.0,
-                    "Unit": "F",
-                    "UnitType": 18
-                },
-                "Maximum": {
-                    "Value": 68.0,
-                    "Unit": "F",
-                    "UnitType": 18
-                }
-            },
-            "Day": {
-                "Icon": 7,
-                "IconPhrase": "Cloudy",
-                "HasPrecipitation": false
-            },
-            "Night": {
-                "Icon": 36,
-                "IconPhrase": "Intermittent clouds",
-                "HasPrecipitation": false
-            },
-            "Sources": [
-                "AccuWeather"
-            ],
-            "MobileLink": "http://www.accuweather.com/en/it/milan/214046/daily-weather-forecast/214046?day=3&lang=en-us",
-            "Link": "http://www.accuweather.com/en/it/milan/214046/daily-weather-forecast/214046?day=3&lang=en-us"
-        },
-        {
-            "Date": "2025-03-30T07:00:00+01:00",
-            "EpochDate": 1743314400,
+            "Date": "2025-04-01T07:00:00+02:00",
+            "EpochDate": 1743483600,
             "Temperature": {
                 "Minimum": {
                     "Value": 49.0,
@@ -114,7 +83,7 @@
                     "UnitType": 18
                 },
                 "Maximum": {
-                    "Value": 74.0,
+                    "Value": 63.0,
                     "Unit": "F",
                     "UnitType": 18
                 }
@@ -132,12 +101,43 @@
             "Sources": [
                 "AccuWeather"
             ],
+            "MobileLink": "http://www.accuweather.com/en/it/milan/214046/daily-weather-forecast/214046?day=3&lang=en-us",
+            "Link": "http://www.accuweather.com/en/it/milan/214046/daily-weather-forecast/214046?day=3&lang=en-us"
+        },
+        {
+            "Date": "2025-04-02T07:00:00+02:00",
+            "EpochDate": 1743570000,
+            "Temperature": {
+                "Minimum": {
+                    "Value": 48.0,
+                    "Unit": "F",
+                    "UnitType": 18
+                },
+                "Maximum": {
+                    "Value": 61.0,
+                    "Unit": "F",
+                    "UnitType": 18
+                }
+            },
+            "Day": {
+                "Icon": 6,
+                "IconPhrase": "Mostly cloudy",
+                "HasPrecipitation": false
+            },
+            "Night": {
+                "Icon": 38,
+                "IconPhrase": "Mostly cloudy",
+                "HasPrecipitation": false
+            },
+            "Sources": [
+                "AccuWeather"
+            ],
             "MobileLink": "http://www.accuweather.com/en/it/milan/214046/daily-weather-forecast/214046?day=4&lang=en-us",
             "Link": "http://www.accuweather.com/en/it/milan/214046/daily-weather-forecast/214046?day=4&lang=en-us"
         },
         {
-            "Date": "2025-03-31T07:00:00+01:00",
-            "EpochDate": 1743400800,
+            "Date": "2025-04-03T07:00:00+02:00",
+            "EpochDate": 1743656400,
             "Temperature": {
                 "Minimum": {
                     "Value": 47.0,
@@ -145,14 +145,14 @@
                     "UnitType": 18
                 },
                 "Maximum": {
-                    "Value": 72.0,
+                    "Value": 69.0,
                     "Unit": "F",
                     "UnitType": 18
                 }
             },
             "Day": {
-                "Icon": 1,
-                "IconPhrase": "Sunny",
+                "Icon": 3,
+                "IconPhrase": "Partly sunny",
                 "HasPrecipitation": false
             },
             "Night": {

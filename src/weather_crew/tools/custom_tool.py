@@ -2,7 +2,7 @@ import datetime
 import json
 import os
 import urllib
-from typing import Any, Dict, Optional
+from typing import Any, Dict, List, Optional
 
 from crewai.tools import tool
 from dotenv import load_dotenv
@@ -59,7 +59,7 @@ def get_supported_locations(url: str) -> Dict[str, Any]:
     return supported_locations
 
 
-def accuweather_get_forecast(url: str, location_id: int) -> Dict[str, Any]:
+def accuweather_get_forecast(url: str, location_id: int, use_api: bool = True) -> List:
     """Get the weather forecast for the next day.
 
     Args:
@@ -67,23 +67,34 @@ def accuweather_get_forecast(url: str, location_id: int) -> Dict[str, Any]:
         AccuWeather API endpoint URL.
       location_id: int
         AccuWeather location key.
+      use_api: bool, optional, Default = True
+        Whether to use the Accuweather API to get the weather forecast.
+        If False, it loads the latest weather data from a json file.
+        For development purposes only, to avoid incurring into API limitations
+        while testing and debugging (50 API calls per day).
 
     Returns:
-      weather_forecast_dict: Dict[str, Any]
-        Weather forecast for the next day, including:
-            - "weather_text" (str): Text description of the weather.
-            - "temperature_min" (int): Minimum temperature in Celsius.
-            - "temperature_max" (int): Maximum temperature in Celsius.
+      weather_forecast_dict: List of dictionaries, with the weather forecast for the
+      next 5 days, in the format:
+            [{"date" (str): Date in the format "YYYY-MM-DD".
+              "weather_text" (str): Text description of the weather.
+              "temperature_min" (int): Minimum temperature in Celsius.
+              "temperature_max" (int): Maximum temperature in Celsius}]
     """
 
     days = 5
     url = (
         f"{url}/forecasts/v1/daily/{days}day/{location_id}?apikey={ACCUWEATHER_API_KEY}"
     )
-    data = get_json_data(url)
 
-    # with open(f"test_weather_data_{days}day.json", "w") as f:
-    #    json.dump(data, f, indent=4)
+    if use_api:
+        data = get_json_data(url)
+
+        with open(f"test_weather_data_{days}day.json", "w") as f:
+            json.dump(data, f, indent=4)
+    else:
+        with open(f"test_weather_data_{days}day.json", "r") as f:
+            data = json.load(f)
 
     daily_forecasts_list = data.get("DailyForecasts", [])
 
@@ -93,7 +104,7 @@ def accuweather_get_forecast(url: str, location_id: int) -> Dict[str, Any]:
         date = daily_forecast["Date"]
         date_format = "%Y-%m-%dT%H:%M:%S%z"
 
-        date = datetime.datetime.strptime(date, date_format).strftime("%Y-%m-%d")
+        date = datetime.datetime.strptime(date, date_format).date()
 
         daily_weather_text = daily_forecast["Day"]["IconPhrase"]
 
@@ -121,10 +132,6 @@ def accuweather_get_forecast(url: str, location_id: int) -> Dict[str, Any]:
                 "weather_text": daily_weather_text,
             }
         )
-
-    # weather_forecast_dict["weather_text"] = daily_weather_text
-    # weather_forecast_dict["temperature_min"] = temperature_min
-    # weather_forecast_dict["temperature_max"] = temperature_max
 
     return weather_forecast_list
 
@@ -239,7 +246,9 @@ def get_weather(
         country_id=country,
         administrative_area_localized_name=administrative_area_localized_name,
     )
-    result = accuweather_get_forecast(endpoint, location_id=location_id)
+
+    # TODO: set use_api=True (this is set to False only for debugging purposes)
+    result = accuweather_get_forecast(endpoint, location_id=location_id, use_api=False)
 
     for idx, res in enumerate(result):
         date = res["Date"]
@@ -247,11 +256,4 @@ def get_weather(
         if date < start_date or date > end_date:
             del result[idx]
 
-    # TODO: remove, testing purposes only
-    # result = {"temperature_min": "15", "temperature_max": "25", "weather_text": "Rainy"}
-
     return result
-
-
-# result = get_weather.run("Milan")
-# print(result)

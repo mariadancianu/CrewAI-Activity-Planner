@@ -47,6 +47,11 @@ def run(
         "user_interests": user_interests,
     }
 
+    print("\n================================")
+    import pprint
+
+    pprint.pprint(inputs)
+
     output = ""
 
     # Create and run the crew
